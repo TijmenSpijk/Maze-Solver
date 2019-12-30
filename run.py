@@ -1,6 +1,6 @@
 import argparse
 import solve
-from tkinter import filedialog
+from tkinter import filedialog, messagebox
 from tkinter import *
 from maze import Maze
 from PIL import Image
@@ -14,9 +14,9 @@ def main():
     path = openFile(directory)
     image = Image.open(path)
     maze = Maze(image)
-    maze.showNodes()
-    saveFile(directory, maze.imageNodes)
-    # solve(maze)
+    solve.solve(maze)
+    if(messagebox.askyesno(title='Save?', message='Do you want to save the solution')):
+        saveFile(directory, maze.imagePath)
 
 def openFile(directory):    
     filename = filedialog.askopenfilename(initialdir = directory, title = "Select Maze", filetypes = (("png files","*.png"),("all files","*.*")))

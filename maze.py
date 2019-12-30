@@ -181,7 +181,7 @@ class Maze:
         return True
 # endregion
 
-# region => Visualize Nodes
+# region => Visualize Nodes and Path
     def showNodes(self):
         for i in self.nodes:
             if (i.isStart):
@@ -191,6 +191,6 @@ class Maze:
             else:
                 self.imageNodes.putpixel((i.x, i.y), red)
     
-    def showPath(self):
+    def showPath(self, path):
         pass
 # endregion
