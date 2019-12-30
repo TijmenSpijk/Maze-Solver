@@ -1,13 +1,32 @@
+up = 1
+down = 2
+left = 3
+right = 4
+
 class Node:
     def __init__(self, x, y):
         self.x = x
         self.y = y
         self.isStart = False
         self.isEnd = False
-        self.connected = []
+        self.up = ()
+        self.down = ()
+        self.left = ()
+        self.right = ()
     
-    def connect(self, node):
-        self.connected.append(node)
+    def connect(self, node, distance, direction):
+        if (direction == up):
+            if (self.up == ()):
+                self.up = (node, distance)
+        elif (direction == down):
+            if (self.down == ()):
+                self.down = (node, distance)
+        elif (direction == left):
+            if (self.left == ()):
+                self.left = (node, distance)
+        elif (direction == right):
+            if (self.right == ()):
+                self.right = (node, distance)
     
     def Start(self):
         self.isStart = True

@@ -7,6 +7,12 @@ red   = (255, 0, 0, 255)
 green = (0, 255, 0, 255)
 blue  = (0, 0, 255, 255)
 
+#some global directions
+up = 1
+down = 2
+left = 3
+right = 4
+
 # {
 #   The Maze Class:
 #   The class to convert the image into a maze
@@ -19,6 +25,7 @@ class Maze:
         self.height = image.height
         self.nodes = []
         self.createNodes()
+        self.connectNodes()
 
     # Function to conver the image into a set of connected nodes
     def createNodes(self):
@@ -127,6 +134,49 @@ class Maze:
             print("found one")
             return True
         return False
+# endregion
+
+# region => Connect Nodes
+    # Function to connect neighbouring nodes
+    def connectNodes(self):        
+        for node in self.nodes:
+            neighbours = 0
+            for restnode in self.nodes:
+                if (node.x == restnode.x and node.y != restnode.y):
+                    if (self.checkWallY(node.y, restnode.y, node.x)):
+                        distance = abs(node.x - restnode.x)
+                        if (node.y > restnode.y): d1, d2 = up, down
+                        else: d1, d2 = down, up
+                        node.connect(restnode, distance, d1)
+                        restnode.connect(node, distance, d2)
+                        neighbours += 1
+                elif (node.y == restnode.y and node.x != restnode.x):
+                    if (self.checkWallX(node.x, restnode.x, node.y)):
+                        distance = abs(node.y - restnode.y)
+                        if (node.x > restnode.x): d1, d2 = left, right
+                        else: d1,d2 = right, left
+                        node.connect(restnode, distance, d1)
+                        restnode.connect(node, distance, d2)
+                        neighbours += 1
+                if (neighbours >= 4):
+                    break
+
+    # Function to check if the two nodes you are checking are on a valid path in x and y direction
+    def checkWallX(self, a, b, y):
+        start = a if a < b else b
+        end = a if a > b else b
+        for x in range(start, end):
+            if (self.image.getpixel((x,y)) == black):
+                return False
+        return True
+
+    def checkWallY(self, a, b, x):
+        start = a if a < b else b
+        end = a if a > b else b
+        for y in range(start, end):
+            if (self.image.getpixel((x,y)) == black):
+                return False
+        return True
 # endregion
 
 # region => Visualize Nodes
