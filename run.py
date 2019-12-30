@@ -25,7 +25,7 @@ def openFile(directory):
 def saveFile(directory, image):
     root = Tk()
     root.withdraw()
-    filename = filedialog.asksaveasfilename(initialdir = directory, title = "Save Maze", filetypes = (("png files","*.png"),("all files","*.*")))
+    filename = filedialog.asksaveasfilename(initialdir = directory, defaultextension='.png',filetypes=(('PNG files', '*.png'),('All files', '*.*')))
     if filename != None:
         image.save(filename)
     return
