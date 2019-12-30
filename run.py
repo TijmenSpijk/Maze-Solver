@@ -6,6 +6,8 @@ from maze import Maze
 from PIL import Image
 
 def main():
+    root = Tk()
+    root.withdraw()
     directory =  'C:/Users/Tijmen/Desktop/Stack/Projects/Python/Maze-Solver/Images/'
     # directory = 'D:/Stack Sync Folder/Projects/Python/Maze-Solver/Images/'
     filename = '10.png'
@@ -16,15 +18,11 @@ def main():
     saveFile(directory, maze.imageNodes)
     # solve(maze)
 
-def openFile(directory):
-    root = Tk()
-    root.withdraw()
+def openFile(directory):    
     filename = filedialog.askopenfilename(initialdir = directory, title = "Select Maze", filetypes = (("png files","*.png"),("all files","*.*")))
     return filename
 
 def saveFile(directory, image):
-    root = Tk()
-    root.withdraw()
     filename = filedialog.asksaveasfilename(initialdir = directory, defaultextension='.png',filetypes=(('PNG files', '*.png'),('All files', '*.*')))
     if filename != None:
         image.save(filename)
