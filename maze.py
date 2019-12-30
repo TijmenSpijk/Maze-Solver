@@ -21,6 +21,8 @@ right = 4
 class Maze:
     def __init__(self, image: Image):
         self.image = image
+        self.imageNodes = image.copy()
+        self.imagePath = image.copy()
         self.width = image.width
         self.height = image.height
         self.nodes = []
@@ -181,15 +183,13 @@ class Maze:
 
 # region => Visualize Nodes
     def showNodes(self):
-        copy = self.image.copy()
         for i in self.nodes:
             if (i.isStart):
-                copy.putpixel((i.x, i.y), green)
+                self.imageNodes.putpixel((i.x, i.y), green)
             elif(i.isEnd):
-                copy.putpixel((i.x, i.y), blue)
+                self.imageNodes.putpixel((i.x, i.y), blue)
             else:
-                copy.putpixel((i.x, i.y), red)
-        copy.show()
+                self.imageNodes.putpixel((i.x, i.y), red)
     
     def showPath(self):
         pass
