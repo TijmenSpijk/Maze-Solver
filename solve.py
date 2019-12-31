@@ -1,5 +1,5 @@
 from node import Node
-from data import *
+from data import Stack, Queue
 
 dfs = 1
 bfs = 2
@@ -28,8 +28,28 @@ def depthFirstSearch(nodes, start):
             if (nodes[node].isEnd):
                 return path
             visited.add(node)
-            for i in getNeighbours(nodes, node):
-                stack.push((i, path + [i]))
+            for neighbour in getNeighbours(nodes, node):
+                stack.push((neighbour, path + [neighbour]))
+
+def breadtFirstSearch(nodes, start):
+    queue = Queue()
+    queue.enqueue((start, [start]))
+    visited = set()
+    visited.add(start)
+    while queue:
+        (node, path) = queue.dequeue()
+        if (nodes[node].isEnd):
+            return path
+        for neighbour in getNeighbours(nodes, node):
+            if (neighbour not in visited):
+                visited.add(neighbour)
+                queue.enqueue((neighbour, path + [neighbour]))
+
+def dijkstra(nodes, start):
+    pass
+
+def aStar(nodes, start):
+    pass
 
 def getNeighbours(nodes, node):
     neighbours = []
@@ -42,12 +62,3 @@ def getNeighbours(nodes, node):
     if (nodes[node].right != ()):
         neighbours.append(nodes[node].right[0].number)
     return neighbours
-
-def breadtFirstSearch(nodes, node):
-    pass
-
-def dijkstra(nodes, node):
-    pass
-
-def aStar(nodes, node):
-    pass
