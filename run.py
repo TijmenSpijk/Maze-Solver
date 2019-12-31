@@ -15,14 +15,14 @@ def main():
     root.withdraw()
     directory =  '../Maze-Solver/Images'
     if(messagebox.askyesno(title='Generate?', message='Do you have a maze to solve? (NO => I will generate one)')):
-        path = openFile(directory)
+        filepath = openFile(directory)
     else :
         generated_maze = generateMaze()
-    image = Image.open(path)
+    image = Image.open(filepath)
     maze = Maze(image)
     maze.showNodes()
-    path = solve.solve(maze, dfs)
-    maze.showPath(path)
+    solution = solve.solve(maze, dfs)
+    maze.showPath(solution)
     if(messagebox.askyesno(title='Save?', message='Do you want to save the solution')):
         saveFile(directory, maze.imagePath)
 

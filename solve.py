@@ -18,32 +18,30 @@ def solve(maze, algorithm):
         path = aStar(maze.nodes, 0)
     return path
 
-def depthFirstSearch(nodes, node):
-    path = []
-    if (nodes[node].isEnd):
-        return [node]
-    nodes[node].visit()
-    if ((nodes[node].up != ()) and (not nodes[node].up[0].visited)):
-        path.extend(depthFirstSearch(nodes, nodes[node].up[0].number))
-        path.insert(0, node)
-        if (nodes[path[path.count(path) - 1]].isEnd):
-            return path
-    if ((nodes[node].down != ()) and (not nodes[node].down[0].visited)):
-        path.extend(depthFirstSearch(nodes, nodes[node].down[0].number))
-        path.insert(0, node)
-        if (nodes[path[path.count(path) - 1]].isEnd):
-            return path
-    if ((nodes[node].left != ()) and (not nodes[node].left[0].visited)):
-        path.extend(depthFirstSearch(nodes, nodes[node].left[0].number))
-        path.insert(0, node)
-        if (nodes[path[path.count(path) - 1]].isEnd):
-            return path
-    if ((nodes[node].right != ()) and (not nodes[node].right[0].visited)):
-        path.extend(depthFirstSearch(nodes, nodes[node].right[0].number))
-        path.insert(0, node)
-        if (nodes[path[path.count(path) - 1]].isEnd):
-            return path
-    return path
+def depthFirstSearch(nodes, start):
+    stack = Stack()
+    stack.push((start, [start]))
+    visited = set()
+    while stack:
+        (node, path) = stack.pop()
+        if (node not in visited):
+            if (nodes[node].isEnd):
+                return path
+            visited.add(node)
+            for i in getNeighbours(nodes, node):
+                stack.push((i, path + [i]))
+
+def getNeighbours(nodes, node):
+    neighbours = []
+    if (nodes[node].up != ()):
+        neighbours.append(nodes[node].up[0].number)
+    if (nodes[node].down != ()):
+        neighbours.append(nodes[node].down[0].number)
+    if (nodes[node].left != ()):
+        neighbours.append(nodes[node].left[0].number)
+    if (nodes[node].right != ()):
+        neighbours.append(nodes[node].right[0].number)
+    return neighbours
 
 def breadtFirstSearch(nodes, node):
     pass
