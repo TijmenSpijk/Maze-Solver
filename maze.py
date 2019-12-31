@@ -196,10 +196,39 @@ class Maze:
                 self.imageNodes.putpixel((i.x, i.y), blue)
             else:
                 self.imageNodes.putpixel((i.x, i.y), red)
-        self.imagePath = self.imageNodes.copy()
+        #self.imagePath = self.imageNodes.copy()
     
-    def showPath(self, path):
-        for i in path:
-            x,y = self.nodes[i].x, self.nodes[i].y
+    def showPath(self, path: list):
+        while (path.__len__() >= 2):
+            from_ = path[0]
+            to_   = path[1]
+            x1 = self.nodes[from_].x
+            x2 = self.nodes[to_].x
+            y1 = self.nodes[from_].y
+            y2 = self.nodes[to_].y
+            if (x1 == x2):
+                self.showPartY(from_, to_)
+            elif (y1 == y2):
+                self.showPartX(from_, to_)
+            self.imagePath.putpixel((x1,y1), red)
+            self.imagePath.putpixel((x2,y2), red)
+            path.remove(from_)
+    
+    def showPartX(self, from_, to_):
+        x1 = self.nodes[from_].x
+        x2 = self.nodes[to_].x
+        start = x1 if x1 < x2 else x2
+        end = x1 if x1 > x2 else x2
+        y = self.nodes[to_].y
+        for x in range(start, end):
+            self.imagePath.putpixel((x,y), gray)
+
+    def showPartY(self, from_, to_):
+        y1 = self.nodes[from_].y
+        y2 = self.nodes[to_].y
+        start = y1 if y1 < y2 else y2
+        end = y1 if y1 > y2 else y2
+        x = self.nodes[to_].x
+        for y in range(start, end):
             self.imagePath.putpixel((x,y), gray)
 # endregion
