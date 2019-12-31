@@ -6,6 +6,7 @@ black = (0, 0, 0, 255)
 red   = (255, 0, 0, 255)
 green = (0, 255, 0, 255)
 blue  = (0, 0, 255, 255)
+gray  = (125, 125, 125, 255)
 
 #some global directions
 up = 1
@@ -31,8 +32,9 @@ class Maze:
 
     # Function to conver the image into a set of connected nodes
     def createNodes(self):
+        number = 1
         xstart, ystart = self.findStart(), 1
-        start = Node(xstart, ystart)
+        start = Node(xstart, ystart, 0)
         start.Start()
         self.nodes.append(start)
         # check all pixel => check if that pixel needs to be a node
@@ -42,22 +44,26 @@ class Maze:
                 if (pixel == white):
                     # Corner
                     if (self.isCorner(i, j)):
-                        node = Node(i, j)
+                        node = Node(i, j, number)
+                        number += 1
                         self.nodes.append(node)
                     # T-Spit
                     elif (self.isTSplit(i, j)):
-                        node = Node(i, j)
+                        node = Node(i, j, number)
+                        number += 1
                         self.nodes.append(node)
                     # Dead End
                     elif (self.isDeadEnd(i, j)):
-                        node = Node(i, j)
+                        node = Node(i, j, number)
+                        number += 1
                         self.nodes.append(node)
                     # Cross Road
                     elif (self.isCrossroad(i, j)):
-                        node = Node(i, j)
+                        node = Node(i, j, number)
+                        number += 1
                         self.nodes.append(node)
         xend, yend = self.findEnd(), self.width - 2
-        end = Node(xend, yend)
+        end = Node(xend, yend, number)
         end.End()
         self.nodes.append(end)
 
@@ -190,7 +196,10 @@ class Maze:
                 self.imageNodes.putpixel((i.x, i.y), blue)
             else:
                 self.imageNodes.putpixel((i.x, i.y), red)
+        self.imagePath = self.imageNodes.copy()
     
     def showPath(self, path):
-        pass
+        for i in path:
+            x,y = self.nodes[i].x, self.nodes[i].y
+            self.imagePath.putpixel((x,y), gray)
 # endregion

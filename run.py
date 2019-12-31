@@ -5,16 +5,24 @@ from tkinter import *
 from maze import Maze
 from PIL import Image
 
+dfs = 1
+bfs = 2
+dstr = 3
+astar = 4
+
 def main():
     root = Tk()
     root.withdraw()
-    directory =  'C:/Users/Tijmen/Desktop/Stack/Projects/Python/Maze-Solver/Images/'
-    # directory = 'D:/Stack Sync Folder/Projects/Python/Maze-Solver/Images/'
-    filename = '10.png'
-    path = openFile(directory)
+    directory =  '../Maze-Solver/Images'
+    if(messagebox.askyesno(title='Generate?', message='Do you have a maze to solve? (NO => I will generate one)')):
+        path = openFile(directory)
+    else :
+        generated_maze = generateMaze()
     image = Image.open(path)
     maze = Maze(image)
-    solve.solve(maze)
+    maze.showNodes()
+    path = solve.solve(maze, dfs)
+    maze.showPath(path)
     if(messagebox.askyesno(title='Save?', message='Do you want to save the solution')):
         saveFile(directory, maze.imagePath)
 
@@ -27,6 +35,9 @@ def saveFile(directory, image):
     if filename != None:
         image.save(filename)
     return
+
+def generateMaze():
+    pass
 
 if __name__ == '__main__':
     main()
