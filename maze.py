@@ -139,7 +139,6 @@ class Maze:
         left = self.image.getpixel((x-1,y))
         right = self.image.getpixel((x+1,y))
         if (up == white and right == white and left == white and down == white):
-            print("found one")
             return True
         return False
 # endregion

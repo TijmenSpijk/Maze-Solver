@@ -14,14 +14,17 @@ def main():
     root = Tk()
     root.withdraw()
     directory =  '../Maze-Solver/Images'
-    if(messagebox.askyesno(title='Generate?', message='Do you have a maze to solve? (NO => I will generate one)')):
-        filepath = openFile(directory)
-    else :
-        generated_maze = generateMaze()
+    # if(messagebox.askyesno(title='Generate?', message='Do you have a maze to solve? (NO => I will generate one)')):
+    #     filepath = openFile(directory)
+    # else :
+    #     generated_maze = generateMaze()
+    filepath = openFile(directory)
     image = Image.open(filepath)
     maze = Maze(image)
     maze.showNodes()
-    solution = solve.solve(maze, dfs)
+    if(messagebox.askyesno(title='Save Node Image?', message='Do you want to save the nodes')):
+        saveFile(directory, maze.imageNodes)
+    solution = solve.solve(maze, bfs)
     maze.showPath(solution)
     if(messagebox.askyesno(title='Save?', message='Do you want to save the solution')):
         saveFile(directory, maze.imagePath)

@@ -22,7 +22,7 @@ def depthFirstSearch(nodes, start):
     stack = Stack()
     stack.push((start, [start]))
     visited = set()
-    while stack:
+    while (stack.count() > 0):
         (node, path) = stack.pop()
         if (node not in visited):
             if (nodes[node].isEnd):
@@ -36,7 +36,8 @@ def breadtFirstSearch(nodes, start):
     queue.enqueue((start, [start]))
     visited = set()
     visited.add(start)
-    while queue:
+    print(queue.count())
+    while (queue.count() > 0):
         (node, path) = queue.dequeue()
         if (nodes[node].isEnd):
             return path
