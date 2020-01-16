@@ -36,7 +36,6 @@ def breadtFirstSearch(nodes, start):
     queue.enqueue((start, [start]))
     visited = set()
     visited.add(start)
-    print(queue.count())
     while (queue.count() > 0):
         (node, path) = queue.dequeue()
         if (nodes[node].isEnd):

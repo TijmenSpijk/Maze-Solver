@@ -198,7 +198,7 @@ class Maze:
         #self.imagePath = self.imageNodes.copy()
     
     def showPath(self, path: list):
-        while (path.__len__() >= 2):
+        while (len(path) >= 2):
             from_ = path[0]
             to_   = path[1]
             x1 = self.nodes[from_].x

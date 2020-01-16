@@ -9,7 +9,7 @@ class Stack:
         return self.items.pop(0)
 
     def count(self):
-        return self.items.count(self.items)
+        return len(self.items)
 
 class Queue:
     def __init__(self):
@@ -22,4 +22,4 @@ class Queue:
         return self.items.pop(self.count() - 1)
 
     def count(self):
-        return self.items.count(self.items)
+        return len(self.items)
