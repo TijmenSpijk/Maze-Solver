@@ -24,7 +24,7 @@ def main():
     maze.showNodes()
     if(messagebox.askyesno(title='Save Node Image?', message='Do you want to save the nodes')):
         saveFile(directory, maze.imageNodes)
-    solution = solve.solve(maze, bfs)
+    solution = solve.solve(maze, dfs)
     maze.showPath(solution)
     if(messagebox.askyesno(title='Save?', message='Do you want to save the solution')):
         saveFile(directory, maze.imagePath)

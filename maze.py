@@ -33,13 +33,13 @@ class Maze:
     # Function to conver the image into a set of connected nodes
     def createNodes(self):
         number = 1
-        xstart, ystart = self.findStart(), 1
+        xstart, ystart = self.findStart(), 0
         start = Node(xstart, ystart, 0)
         start.Start()
         self.nodes.append(start)
         # check all pixel => check if that pixel needs to be a node
-        for i in range(1, self.width - 1):
-            for j in range(2, self.height - 1):
+        for i in range(0, self.width - 1):
+            for j in range(1, self.height - 1):
                 pixel = self.image.getpixel((i, j))
                 if (pixel == white):
                     # Corner
@@ -62,7 +62,7 @@ class Maze:
                         node = Node(i, j, number)
                         number += 1
                         self.nodes.append(node)
-        xend, yend = self.findEnd(), self.width - 2
+        xend, yend = self.findEnd(), self.width - 1
         end = Node(xend, yend, number)
         end.End()
         self.nodes.append(end)
@@ -71,14 +71,14 @@ class Maze:
     # Funtion to find the start node of the maze
     def findStart(self):
         for i in range(1, self.width - 1):
-            if (self.image.getpixel((i, 1)) == white):
+            if (self.image.getpixel((i, 0)) == white):
                 return i
         return None
 
     # Function to find the end node of the maze
     def findEnd(self):
         for i in range(1, self.width - 1):
-            if (self.image.getpixel((i, self.height - 2)) == white):
+            if (self.image.getpixel((i, self.height - 1)) == white):
                 return i
         return None
 
