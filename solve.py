@@ -46,10 +46,10 @@ def breadtFirstSearch(nodes, start):
                 queue.enqueue((neighbour, path + [neighbour]))
 
 def dijkstra(nodes, start):
-    pass
+    return ([])
 
 def aStar(nodes, start):
-    pass
+    return ([])
 
 def getNeighbours(nodes, node):
     neighbours = []

@@ -38,28 +38,28 @@ class Maze:
         start.Start()
         self.nodes.append(start)
         # check all pixel => check if that pixel needs to be a node
-        for i in range(0, self.width - 1):
-            for j in range(1, self.height - 1):
-                pixel = self.image.getpixel((i, j))
+        for y in range(1, self.height - 1):
+            for x in range(1, self.width - 1):
+                pixel = self.image.getpixel((x, y))
                 if (pixel == white):
                     # Corner
-                    if (self.isCorner(i, j)):
-                        node = Node(i, j, number)
+                    if (self.isCorner(x, y)):
+                        node = Node(x, y, number)
                         number += 1
                         self.nodes.append(node)
                     # T-Spit
-                    elif (self.isTSplit(i, j)):
-                        node = Node(i, j, number)
+                    elif (self.isTSplit(x, y)):
+                        node = Node(x, y, number)
                         number += 1
                         self.nodes.append(node)
                     # Dead End
-                    elif (self.isDeadEnd(i, j)):
-                        node = Node(i, j, number)
+                    elif (self.isDeadEnd(x, y)):
+                        node = Node(x, y, number)
                         number += 1
                         self.nodes.append(node)
                     # Cross Road
-                    elif (self.isCrossroad(i, j)):
-                        node = Node(i, j, number)
+                    elif (self.isCrossroad(x, y)):
+                        node = Node(x, y, number)
                         number += 1
                         self.nodes.append(node)
         xend, yend = self.findEnd(), self.width - 1
