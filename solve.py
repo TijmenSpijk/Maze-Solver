@@ -23,10 +23,10 @@ def depthFirstSearch(nodes, start):
     stack.push((start, [start]))
     visited = set()
     while (stack.count() > 0):
-        (node, path) = stack.pop()
+        (node, path) = stack.pop()        
+        if (nodes[node].isEnd):
+            return path
         if (node not in visited):
-            if (nodes[node].isEnd):
-                return path
             visited.add(node)
             for neighbour in getNeighbours(nodes, node):
                 stack.push((neighbour, path + [neighbour]))

@@ -42,7 +42,7 @@ class Maze:
             for x in range(1, self.width - 1):
                 pixel = self.image.getpixel((x, y))
                 if (pixel == white):
-                    # Corner
+                    # Corners
                     if (self.isCorner(x, y)):
                         node = Node(x, y, number)
                         number += 1
@@ -64,6 +64,7 @@ class Maze:
                         self.nodes.append(node)
         xend, yend = self.findEnd(), self.width - 1
         end = Node(xend, yend, number)
+        print(number)
         end.End()
         self.nodes.append(end)
 
